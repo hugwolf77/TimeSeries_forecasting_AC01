@@ -1,0 +1,28 @@
+@startuml TS-forecasting
+
+scale 1.0
+title TimeSeries Forecasting Model
+
+    package "data_provider" #6cc3f5 {
+        package "data_factory" #fff9a6 {
+            class data_factory { 
+                +data_provider()
+                data_dict : Dataset_Custom
+            } 
+        }
+        package "data_loader" #fff9a6 {
+                class Dataset_Custom
+                class Dataset_Pred
+            data_factory --|> Dataset_Custom : torch-Dataset
+            data_factory --|> Dataset_Pred : torch-Dataset
+            ' masking --* Dataset_Custom
+            ' timefeatures --* Dataset_Custom
+            ' masking --* Dataset_Pred
+            ' timefeatures --* Dataset_Pred
+            }
+            ' data_loader --* Exp_Main
+    }
+
+
+
+@enduml
